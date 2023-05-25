@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8" />
 	<title>Products Array | COMP1073 Client-Side JavaScript</title>
@@ -8,7 +9,8 @@
 
 <body>
 	<h1>Products Array</h1>
-	<p>Let’s use a product detail array and some of the array methods we’ve worked with today to output some useful information to a simple HTML table.</p>
+	<p>Let’s use a product detail array and some of the array methods we’ve worked with today to output some useful
+		information to a simple HTML table.</p>
 	<table>
 		<thead>
 			<tr>
@@ -31,28 +33,59 @@
 	<script>
 		// STEP 1: Declare and initialize variables
 		// STEP 1a: Grab the parts of the DOM that we need to build the invoice
-		
+		var productList = document.querySelector("tbody");
+		//console.log(productList);
+		var finalPrice = document.querySelector("tfoot td");
+		//console.log(finalPrice);
+
 		// STEP 1b: Build the products array in the format 'Product Name:0.00'
+		var productArray = ["Tshirts: 10.599999999999999", "Shirts: 20.32", "Pants: 50.66", "Shoes: 100.21", "Socks: 5.99"];
+		//console.log(productArray);
 
 		// STEP 1c: Set up invoiceTotal variable - start at zero
+		var invoiceTotal = 0;
 
 		// STEP 2: Build a loop to iterate through the products array
-
+		for (let i = 0; i < productArray.length; i++) {
 			// STEP 3: Break apart the product name from the price for each item with split()
+			var productArraySplit = productArray[i].split(": ");
+			//console.log(productArraySplit[i]);
+
 			// STEP 4: Now we have an array as an element of an array - set the second array element to the product price (as type number)
-
+			var productPrice = Number(productArraySplit[1]);
+			//console.log(productPrice);
 			// STEP 5: Add the price of this product to the invoice total
-
+			invoiceTotal += productPrice; // invoiceTotal = invoiceTotal + productPrice
+			//								ans = 0 + 10
+			// 								ans = 10 + 20; ans = 30 + 50
+			//console.log(invoiceTotal);
 			// STEP 6: Capture each product name and price as variables 
-
+			var productDesc = productArraySplit[0];
+			//var productPrice = productArraySplit[1];
+			console.log(productDesc);
+			console.log(productPrice);
 			// STEP 7: Create a TR element for this product and price in the invoice table
+			// <table>
+			// <tr>
+			//	<td>
+			//	</td>
+			//</tr>
+			//	</table>
+			var productRow = document.createElement("tr");
 
 			// STEP 8: Build the string that contains two TD elements each containing one of the item description, and the item price
-
+			//<td>product Description 1</td><td>Price 1</td>
+			//<td>product Description 2</td><td>Price 2</td>
+			//<td>product Description 3</td><td>Price 3</td>
+			var productData = "<td>" + productDesc + "</td><td>" + productPrice + "</td>";
 			// STEP 9: Set the above string as the innerHTML of the new TR element, and then append the new element to the table body (var productList)
+			productRow.innerHTML = productData;
+			productList.appendChild(productRow);
+			// STEP 10: Set the total cost of the invoice as the textContent of the TD in the TFOOT (var totalData), rounding the number to two decimal places
+			finalPrice.textContent = invoiceTotal.toFixed(2);
 
-		// STEP 10: Set the total cost of the invoice as the textContent of the TD in the TFOOT (var totalData), rounding the number to two decimal places
-
+		}
 	</script>
 </body>
+
 </html>
